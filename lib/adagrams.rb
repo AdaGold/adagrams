@@ -56,20 +56,28 @@ def score_word(word)
 
   word_array = word.upcase.split(//)
   word_array.each do |letter|
+    score_one = ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"]
+    score_two = ["D", "G"]
+    score_three = ["B", "C", "M", "P"]
+    score_four = ["F", "H", "V", "W", "Y"]
+    score_five = ["K"]
+    score_eight = ["J", "X"]
+    score_ten = ["Q", "Z"]
+
     case letter
-    when letter == "A", "E", "I", "O", "U", "L", "N", "R", "S", "T"
+    when letter.include?(score_one)
       score += 1
-    when letter == "D", "G"
+    when letter.include?(score_two)
       score += 2
-    when letter == "B", "C", "M", "P"
+    when letter.include?(score_three)
       score += 3
-    when letter == "F", "H", "V", "W", "Y"
+    when letter.include?(score_four)
       score += 4
-    when letter == "K"
+    when letter.include?(score_five)
       score += 5
-    when letter == "J", "X"
+    when letter.include?(score_eight)
       score += 8
-    when letter == "Q", "Z"
+    when letter.include?(score_ten)
       score += 10
     end
   end
