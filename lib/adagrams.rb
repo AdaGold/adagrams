@@ -1,3 +1,5 @@
+require "pry"
+
 def draw_letters
   alphabet_soup = {
     A: 9,
@@ -56,30 +58,72 @@ def score_word(word)
 
   word_array = word.upcase.split(//)
   word_array.each do |letter|
-    score_one = ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"]
-    score_two = ["D", "G"]
-    score_three = ["B", "C", "M", "P"]
-    score_four = ["F", "H", "V", "W", "Y"]
-    score_five = ["K"]
-    score_eight = ["J", "X"]
-    score_ten = ["Q", "Z"]
-
     case letter
-    when letter.include?(score_one)
+
+    when "A", "E", "I", "O", "U", "L", "N", "R", "S", "T"
       score += 1
-    when letter.include?(score_two)
+    when "D", "G"
       score += 2
-    when letter.include?(score_three)
+    when "B", "C", "M", "P"
       score += 3
-    when letter.include?(score_four)
+    when "F", "H", "V", "W", "Y"
       score += 4
-    when letter.include?(score_five)
+    when "K"
       score += 5
-    when letter.include?(score_eight)
+    when "J", "X"
       score += 8
-    when letter.include?(score_ten)
+    when "Q", "Z"
       score += 10
     end
   end
+
+  if word.length > 6 && word.length < 11
+    score += 8
+  end
   return score
+end
+
+def highest_score_from(words)
+  winning_words = {
+    word: "",
+    score: 0,
+  }
+  new_hash = {}
+  score_array = words.map { |string| score_word(string) }
+  words.zip(score_array) { |word, score| new_hash[word] = score }
+
+  # new_hash = words.group_by { |each_play| score_word(each_play) }
+  max_score = new_hash.values.max
+
+  score_check = new_hash.select { |word, score| score == max_score }
+
+  score_check.each do |word, score|
+    if word.length == 10
+      winning_words[:word] = word
+      winning_words[:score] = score
+
+      # binding.pry
+      return winning_words
+    elsif score_check.keys.min_by do |each_word|
+      each_word.length
+      winning_words[:word] = word
+      winning_words[:score] = score
+
+      # binding.pry
+      return winning_words
+    end
+    end
+  end
+  # highest_score = 0
+  # index_of_highest_value = 0
+
+  # score_array = words.map { |string| score_word(string) }
+  # length_array = words.map { |string| string.length }
+
+  # score_array.each_with_index do |index, value|
+  #   if value > highest_score
+  #     highest_score = value
+  #     index_of_highest_value = index
+
+  # end
 end
