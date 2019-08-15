@@ -92,7 +92,6 @@ def highest_score_from(words)
   score_array = words.map { |string| score_word(string) }
   words.zip(score_array) { |word, score| new_hash[word] = score.to_i }
 
-  # new_hash = words.group_by { |each_play| score_word(each_play) }
   max_score = new_hash.values.max
 
   winners = new_hash.select { |word, score| score == max_score }
@@ -102,7 +101,7 @@ def highest_score_from(words)
     if winners_array.length == 1
       winning_words[:word] = word
       winning_words[:score] = winners[word]
-      # winning_words = { word: word, score: score }
+
       return winning_words
     else
       if word.length == 10
@@ -123,47 +122,6 @@ def highest_score_from(words)
         winning_words[:score] = winners[min_word]
         return winning_words
       end
-      # elsif winners.keys.min_by do |each_word|
-      #   each_word.length
-      # end
     end
   end
-
-  # winners.each do |word, score|
-  #   if word.length == 10
-  #     winning_words[:word] = word
-  #     winning_words[:score] = score
-  #     # winning_words = { word: word, score: score }
-  #     return winning_words
-  #   elsif winners.keys.min_by do |each_word|
-  #     each_word.length
-  #   end
-  #   end
-  # end
-
-  #   winners.each do |word, score|
-  #     if
-  #     end
-  #   end
-
-  # winning_words[:word] = word
-  # winning_words[:score] = score
-
-  # binding.pry
-  # return winning_words
-  # elsif
-  #   min = winners.keys.min_by do |each_word|
-  #   each_word.length
-  #end
-  # winning_words[:word] = word
-  # winning_words[:score] = score
-
-  # binding.pry
-
-  # end
-  # winning_words[:word] = word
-  # winning_words[:score] = score
-  # return winning_words
-  # end
-  # end
 end
